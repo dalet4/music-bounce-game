@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Bounce Game</title>
+    <meta name="description" content="Bounce to the beat of your favorite Spotify tracks!">
+    <meta name="theme-color" content="#667eea">
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="pulse-ring pulse-ring-3"></div>
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="logo-section">
+                <div class="logo">🎵</div>
+                <h1 class="game-title">Music Bounce</h1>
+            </div>
+            <div class="user-section">
+                <div id="user-display" class="user-info">Sign in to play</div>
+                <button id="sign-in-btn" class="btn btn-primary">
+                    <span class="btn-icon">🎧</span>
+                    Connect Spotify
+                </button>
+            </div>
+        </header>
+
+        <!-- Authentication Screen -->
+        <div id="auth-screen" class="screen">
+            <div class="auth-container">
+                <div class="auth-hero">
+                    <div class="hero-icon">🎮</div>
+                    <h2>Welcome to Music Bounce</h2>
+                    <p>Sync your bounces to the beat of your favorite Spotify tracks!</p>
+                </div>
+                <div class="auth-features">
+                    <div class="feature">
+                        <div class="feature-icon">🎵</div>
+                        <h3>Beat Analysis</h3>
+                        <p>Advanced AI analyzes your music for perfect timing</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Leaderboards</h3>
+                        <p>Compete with friends and climb the global rankings</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Real-time Feedback</h3>
+                        <p>Get instant scoring based on beat accuracy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Song Selection Screen -->
+        <div id="song-selection" class="screen" style="display: none;">
+            <div class="selection-header">
+                <h2>Choose Your Track</h2>
+                <div class="difficulty-selector">
+                    <label>Difficulty:</label>
+                    <div class="difficulty-buttons">
+                        <button id="easy-btn" class="btn btn-difficulty">Easy</button>
+                        <button id="medium-btn" class="btn btn-difficulty active">Medium</button>
+                        <button id="hard-btn" class="btn btn-difficulty">Hard</button>
+                    </div>
+                </div>
+            </div>
+            <div class="song-list-container">
+                <div id="song-list" class="song-grid">
+                    <!-- Song items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div id="game-container" class="screen" style="display: none;">
+            <div class="game-ui">
+                <div class="score-display">
+                    <span class="score-label">Score</span>
+                    <span id="current-score" class="score-value">0</span>
+                </div>
+                <div class="game-info">
+                    <div class="now-playing">
+                        <div class="track-info">
+                            <div id="track-title" class="track-title">Loading...</div>
+                            <div id="track-artist" class="track-artist">Artist</div>
+                        </div>
+                        <div class="equalizer">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button id="pause-btn" class="btn btn-control">⏸️</button>
+                    <button id="reset-game-btn" class="btn btn-control">🔄</button>
+                    <button id="quit-btn" class="btn btn-control">❌</button>
+                </div>
+            </div>
+            <div id="game-canvas" class="game-canvas"></div>
+            <div class="game-instructions">
+                <p>Use arrow keys or touch to move • Hit platforms on the beat!</p>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over" class="screen overlay" style="display: none;">
+            <div class="game-over-modal">
+                <div class="modal-header">
+                    <h2>Game Over!</h2>
+                    <div class="final-score-display">
+                        <span class="score-label">Final Score</span>
+                        <span id="final-score" class="score-value">0</span>
+                    </div>
+                </div>
+                <div class="modal-content">
+                    <div class="performance-stats">
+                        <div class="stat">
+                            <span class="stat-label">Perfect Hits</span>
+                            <span id="perfect-hits" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Good Hits</span>
+                            <span id="good-hits" class="stat-value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Accuracy</span>
+                            <span id="accuracy" class="stat-value">0%</span>
+                        </div>
+                    </div>
+                    <div class="leaderboard-section">
+                        <h3>Leaderboard</h3>
+                        <div id="leaderboard" class="leaderboard-list">
+                            <!-- Leaderboard entries will be populated -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="play-again-btn" class="btn btn-primary">
+                        <span class="btn-icon">🎵</span>
+                        Play Again
+                    </button>
+                    <button id="new-song-btn" class="btn btn-secondary">
+                        <span class="btn-icon">🎧</span>
+                        New Song
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen overlay" style="display: none;">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">
+                    <h3 id="loading-message">Loading...</h3>
+                    <p id="loading-detail">Preparing your experience</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Elements -->
+        <div id="hit-feedback" class="hit-feedback"></div>
+        <div id="combo-display" class="combo-display"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="enhanced-app.js"></script>
+</body>
+</html>

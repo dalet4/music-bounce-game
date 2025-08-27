@@ -1,0 +1,45 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="albumGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="vinylGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34495e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Album cover background -->
+  <rect width="300" height="300" rx="20" ry="20" fill="url(#albumGradient)"/>
+  
+  <!-- Vinyl record -->
+  <circle cx="150" cy="150" r="120" fill="url(#vinylGradient)" opacity="0.8"/>
+  <circle cx="150" cy="150" r="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="150" cy="150" r="80" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="150" cy="150" r="60" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="150" cy="150" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="150" cy="150" r="20" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="150" cy="150" r="8" fill="#2c3e50"/>
+  
+  <!-- Music note icon -->
+  <g transform="translate(130, 100)" fill="rgba(255,255,255,0.8)">
+    <path d="M20 40c0 5.5-4.5 10-10 10s-10-4.5-10-10 4.5-10 10-10 10 4.5 10 10zm15-35v30c0 5.5-4.5 10-10 10s-10-4.5-10-10 4.5-10 10-10c1.5 0 2.9.3 4.2.9V5h5.8z"/>
+  </g>
+  
+  <!-- Sparkle effects -->
+  <g fill="rgba(255,255,255,0.6)">
+    <circle cx="80" cy="80" r="2" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="220" cy="100" r="1.5" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="200" r="2.5" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="70" cy="220" r="1.8" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;0.1;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

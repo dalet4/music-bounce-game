@@ -1,0 +1,28 @@
+<svg width="120" height="20" viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="platformGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f5576c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a52;stop-opacity:1" />
+    </linearGradient>
+    <filter id="platformGlow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main platform -->
+  <rect x="0" y="0" width="120" height="20" rx="10" ry="10" 
+        fill="url(#platformGradient)" filter="url(#platformGlow)"/>
+  
+  <!-- Top highlight -->
+  <rect x="5" y="2" width="110" height="8" rx="8" ry="4" 
+        fill="rgba(255,255,255,0.3)" opacity="0.6"/>
+  
+  <!-- Border -->
+  <rect x="0" y="0" width="120" height="20" rx="10" ry="10" 
+        fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+</svg>
