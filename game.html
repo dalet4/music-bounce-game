@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Bounce - Rhythm Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Loading Spinner -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="logo">Music<span>Bounce</span></div>
+      <div class="user-info" id="user-info">
+        <div id="user-display"></div>
+        <button id="sign-out-btn" class="btn btn-secondary" style="display: none;">Sign Out</button>
+      </div>
+    </header>
+    
+    <!-- Login Screen -->
+    <div class="auth-screen" id="auth-screen">
+      <h1>Welcome to MusicBounce</h1>
+      <p>Connect with your music service to start playing. Bounce to the beat and rack up points!</p>
+      <button id="sign-in-btn" class="btn">Sign In with Google</button>
+      <div style="margin-top: 20px;">
+        <p>After signing in, you'll need to connect to your music service:</p>
+        <div style="display: flex; gap: 10px; margin-top: 10px; justify-content: center;">
+          <button id="connect-spotify-btn" class="btn btn-secondary" disabled>Connect Spotify</button>
+          <button id="connect-youtube-btn" class="btn btn-secondary" disabled>Connect YouTube</button>
+          <button id="connect-apple-btn" class="btn btn-secondary" disabled>Connect Apple Music</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Song Selection -->
+    <div class="song-selection" id="song-selection">
+      <h2>Select a Song</h2>
+      
+      <div class="settings">
+        <h3>Game Settings</h3>
+        <div class="difficulty-options">
+          <button id="easy-btn" class="btn">Easy</button>
+          <button id="medium-btn" class="btn btn-secondary active">Medium</button>
+          <button id="hard-btn" class="btn btn-accent">Hard</button>
+        </div>
+      </div>
+      
+      <div id="song-list" class="song-list">
+        <!-- Songs will be populated here -->
+      </div>
+    </div>
+    
+    <!-- Game Container -->
+    <div class="game-container" id="game-container">
+      <div id="phaser-game"></div>
+      <button id="pause-game-btn" class="btn btn-secondary" style="margin-top: 20px;">Pause</button>
+      <button id="exit-game-btn" class="btn btn-accent" style="margin-top: 20px;">Exit Game</button>
+    </div>
+    
+    <!-- Game Over Screen -->
+    <div class="game-over" id="game-over">
+      <h2>Game Over</h2>
+      <div class="final-score">Score: <span id="final-score">0</span></div>
+      
+      <div class="leaderboard">
+        <h3>Leaderboard</h3>
+        <div id="leaderboard">
+          <!-- Leaderboard entries will be populated here -->
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button id="play-again-btn" class="btn btn-secondary">Play Again</button>
+        <button id="reset-game-btn" class="btn btn-accent">Reset Game</button>
+        <button id="share-score-btn" class="btn">Share Score</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-functions-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics-compat.js"></script>
+  
+  <!-- Phaser Game Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+  
+  <!-- Game Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
